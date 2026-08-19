@@ -2,7 +2,9 @@ import pandas as pd
 from sklearn.preprocessing import StandardScaler
 import joblib
 
-# set up de scaler
+# Scales X_train/X_test with StandardScaler, fit only on X_train to avoid data leakage.
+
+# set up the scaler
 scaler = StandardScaler()
 
 # we will read the train and test data that we created in the previous step, form the preprocessed_data folder
@@ -19,3 +21,6 @@ pd.DataFrame(X_test_scaled, columns=X_test.columns).to_csv("data/processed_data/
 
 # we also persist the scaler object in the models folder
 joblib.dump(scaler, "models/scaler.pkl")
+
+# Note: Scaling has no real effect on GBR's splits (tree-based, scale-invariant) — this
+# step exists mainly for pipeline completeness / portability to scale-sensitive models.
