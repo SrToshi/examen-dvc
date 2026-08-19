@@ -12,3 +12,13 @@ stages:
     - data/processed_data/X_train.csv
     - data/processed_data/y_test.csv
     - data/processed_data/y_train.csv
+  normalize:
+    cmd: python src/data/normalize.py
+    deps:
+    - data/processed_data/X_test.csv
+    - data/processed_data/X_train.csv
+    - src/data/normalize.py
+    outs:
+    - data/processed_data/X_test_scaled.csv
+    - data/processed_data/X_train_scaled.csv
+    - models/scaler.pkl
