@@ -22,3 +22,18 @@ stages:
     - data/processed_data/X_test_scaled.csv
     - data/processed_data/X_train_scaled.csv
     - models/scaler.pkl
+  gridsearch:
+    cmd: python src/models/grid_search.py
+    deps:
+    - data/processed_data/X_train_scaled.csv
+    - data/processed_data/y_train.csv
+    - src/models/grid_search.py
+    params:
+    - gridsearch.cv
+    - gridsearch.learning_rate
+    - gridsearch.max_depth
+    - gridsearch.min_samples_leaf
+    - gridsearch.n_estimators
+    - gridsearch.subsample
+    outs:
+    - models/best_params.pkl

@@ -60,3 +60,46 @@ stages:
       hash: md5
       md5: 27cd9aa2f921dd3dd99f04503b7ba560
       size: 1143
+  gridsearch:
+    cmd: python src/models/grid_search.py
+    deps:
+    - path: data/processed_data/X_train_scaled.csv
+      hash: md5
+      md5: c1b80eb7f083888b625dd0369cf381f8
+      size: 227497
+    - path: data/processed_data/y_train.csv
+      hash: md5
+      md5: a9cd9d91da89f732843d72548f64ded3
+      size: 25951
+    - path: src/models/grid_search.py
+      hash: md5
+      md5: c4bdb0d485eb88709d76ccf08456b97b
+      size: 897
+    params:
+      params.yaml:
+        gridsearch.cv: 5
+        gridsearch.learning_rate:
+        - 0.005
+        - 0.01
+        - 0.02
+        gridsearch.max_depth:
+        - 5
+        - 7
+        - 9
+        gridsearch.min_samples_leaf:
+        - 5
+        - 10
+        - 15
+        gridsearch.n_estimators:
+        - 150
+        - 250
+        - 350
+        gridsearch.subsample:
+        - 0.75
+        - 0.85
+        - 0.95
+    outs:
+    - path: models/best_params.pkl
+      hash: md5
+      md5: 34ecbbe4020d0a69487452d44c76069e
+      size: 115
